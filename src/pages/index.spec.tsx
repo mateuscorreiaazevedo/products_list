@@ -6,7 +6,7 @@ describe('homepage', () => {
   beforeEach(() => {
     render(
       <ThemeProvider>
-        <Home />
+        <Home data={{ message: '', products: [], status: '' }} />
       </ThemeProvider>,
     )
   })

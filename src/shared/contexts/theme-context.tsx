@@ -21,7 +21,7 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => {
     setTheme(newTheme, {
       expires: dayjs().add(1, 'year').toDate(),
     })
-  }, [])
+  }, [theme])
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
