@@ -1,0 +1,85 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"vcs": {
+		"enabled": false,
+		"clientKind": "git",
+		"useIgnoreFile": false
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"ignore": []
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "space",
+		"indentWidth": 2,
+		"lineWidth": 96,
+		"useEditorconfig": true,
+		"lineEnding": "lf",
+		"attributePosition": "auto"
+	},
+	"javascript": {
+		"formatter": {
+			"arrowParentheses": "asNeeded",
+			"bracketSameLine": false,
+			"bracketSpacing": true,
+			"jsxQuoteStyle": "double",
+			"quoteStyle": "single",
+			"quoteProperties": "asNeeded",
+			"semicolons": "asNeeded",
+			"trailingCommas": "all"
+		}
+	},
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"suspicious": {
+				"noConsole": "error",
+				"noExplicitAny": "off",
+				"noConfusingVoidType": "off"
+			},
+			"style": {
+				"useSelfClosingElements": {
+					"level": "warn",
+					"fix": "safe"
+				}
+			},
+			"a11y": {
+				"noSvgWithoutTitle": "off"
+			},
+			"complexity": {
+				"noForEach": "off",
+				"noStaticOnlyClass": "off",
+				"noExtraBooleanCast": "off"
+			},
+			"correctness": {
+				"noEmptyPattern": {
+					"level": "warn"
+				},
+				"noUnusedImports": {
+					"level": "error",
+					"fix": "safe"
+				},
+				"useExhaustiveDependencies": {
+					"level": "off",
+					"options": {
+						"hooks": [
+							{
+								"name": "useCallback",
+								"stableResult": true
+							}
+						]
+					}
+				},
+				"noUnusedVariables": {
+					"level": "warn",
+					"fix": "safe"
+				}
+			}
+		}
+	}
+}
