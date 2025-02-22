@@ -1,9 +1,14 @@
+import { ThemeProvider } from '@/shared/contexts'
 import { render, screen } from '@testing-library/react'
 import Home from '.'
 
 describe('homepage', () => {
   beforeEach(() => {
-    render(<Home />)
+    render(
+      <ThemeProvider>
+        <Home />
+      </ThemeProvider>,
+    )
   })
 
   it('should hello on display', () => {

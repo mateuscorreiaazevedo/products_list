@@ -1,19 +1,20 @@
-import { Geist, Geist_Mono } from 'next/font/google'
-
-const _geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const _geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+import { useTheme } from '@/shared/contexts'
+import Head from 'next/head'
 
 export default function Home() {
+  const { toggleTheme } = useTheme()
+
   return (
-    <div>
-      <h1 aria-roledescription="heading">Olá</h1>
-    </div>
+    <>
+      <Head>
+        <title>Products List</title>
+      </Head>
+      <div>
+        <h1 aria-roledescription="heading">Olá</h1>
+        <button type="button" onClick={toggleTheme}>
+          Trocar tema
+        </button>
+      </div>
+    </>
   )
 }
