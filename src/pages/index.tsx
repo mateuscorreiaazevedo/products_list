@@ -2,10 +2,10 @@ import type { ListProducts } from '@/modules/product/contracts'
 import { HttpClientProductService } from '@/modules/product/services/http/http-client-product.service'
 import { useTheme } from '@/shared/contexts'
 import { AxiosHttpClientService } from '@/shared/services/http'
-import type { GetStaticProps } from 'next'
+import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const httpClient = new AxiosHttpClientService()
   const productsService = new HttpClientProductService(httpClient)
 
@@ -40,7 +40,11 @@ export default function Home({ data }: { data: ListProducts }) {
         <button type="button" onClick={toggleTheme}>
           Trocar tema
         </button>
-        <pre>{JSON.stringify(data.status, null, 2)}</pre>
+        <ul>
+          {data.products.map(item => (
+            <li key={item.id}>{item.title}</li>
+          ))}
+        </ul>
       </div>
     </>
   )
