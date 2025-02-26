@@ -1,24 +1,22 @@
-import type { ListProducts } from '@/modules/product/contracts'
-import { HttpClientProductService } from '@/modules/product/services/http/http-client-product.service'
+import { productFactory } from '@/core/product'
+import type { ProductItemDTO } from '@/core/product/dtos/list-products.dto'
+import { ProductItemCard } from '@/modules/product'
+import { Grid } from '@/shared/components'
 import { useTheme } from '@/shared/contexts'
-import { AxiosHttpClientService } from '@/shared/services/http'
 import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const httpClient = new AxiosHttpClientService()
-  const productsService = new HttpClientProductService(httpClient)
-
-  const data = await productsService.listAll()
+  const products = await productFactory.listProducts()
 
   return {
     props: {
-      data,
+      products: products.data,
     },
   }
 }
 
-export default function Home({ data }: { data: ListProducts }) {
+export default function Home({ products }: { products: ProductItemDTO[] }) {
   const { toggleTheme } = useTheme()
 
   return (
@@ -40,11 +38,11 @@ export default function Home({ data }: { data: ListProducts }) {
         <button type="button" onClick={toggleTheme}>
           Trocar tema
         </button>
-        <ul>
-          {data.products.map(item => (
-            <li key={item.id}>{item.title}</li>
+        <Grid>
+          {products.map(item => (
+            <ProductItemCard key={item.id} {...item} />
           ))}
-        </ul>
+        </Grid>
       </div>
     </>
   )

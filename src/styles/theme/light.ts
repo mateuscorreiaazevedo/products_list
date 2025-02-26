@@ -22,6 +22,10 @@ export const themeLight: Theme = {
     info: infoColor,
     warning: warningColor,
     error: errorColor,
+    card: {
+      background: '#d1d1d6',
+      text: '#383838',
+    },
   },
   text,
   radius,

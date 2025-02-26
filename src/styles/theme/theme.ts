@@ -31,7 +31,7 @@ export const text: Text = {
   body: {
     fontSize: '1.6rem',
     fontWeight: '400',
-    lineHeight: '2.4rem',
+    lineHeight: '2rem',
     letterSpacing: '-0.01em',
   },
   small: {
@@ -110,6 +110,9 @@ export const spacing: Spacing = {
   '28': '11.2rem',
   '32': '12.8rem',
   '36': '14.4rem',
+  '40': '16rem',
+  full: '100%',
+  fit: 'fit-content',
 }
 
 export const primaryColor = {

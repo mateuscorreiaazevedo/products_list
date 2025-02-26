@@ -1,0 +1,5 @@
+export * from './services/http/http-client-product.service'
+export * from './usecases/list-products.usecase'
+export * from './contracts/products.contract'
+export * from './factories/product.factory'
+export * from './entities/product.entity'

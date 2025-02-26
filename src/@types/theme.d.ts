@@ -30,6 +30,10 @@ type Colors = {
     default: string
     dark: string
   }
+  card: {
+    background: string
+    text: string
+  }
 }
 
 type Font = {
@@ -79,6 +83,9 @@ type Spacing = {
   '28': string
   '32': string
   '36': string
+  '40': string
+  full: '100%'
+  fit: 'fit-content'
 }
 
 interface Theme {

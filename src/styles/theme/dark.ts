@@ -22,6 +22,10 @@ export const themeDark: Theme = {
     info: infoColor,
     success: successColor,
     warning: warningColor,
+    card: {
+      background: '#383838',
+      text: '#f1f2f1',
+    },
   },
   radius,
   spacing,

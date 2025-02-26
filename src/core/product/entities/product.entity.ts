@@ -7,7 +7,7 @@ export interface IProduct {
   brand: string
   model: string
   color: string
-  category: string
+  category?: string
   discount: number
 }
 
