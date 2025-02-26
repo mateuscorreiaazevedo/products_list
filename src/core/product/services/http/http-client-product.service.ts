@@ -25,10 +25,10 @@ export class HttpClientProductService implements ProductsContract {
 
     return products
   }
-  async getById(_id: string): Promise<Product> {
+  async getById(id: number): Promise<Product> {
     await new Promise(resolve => resolve)
     return new Product({
-      id: 1,
+      id: id,
       title: 'Sample Product',
       image: 'https://example.com/image.jpg',
       price: 19.99,

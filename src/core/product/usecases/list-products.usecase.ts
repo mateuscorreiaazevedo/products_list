@@ -1,3 +1,4 @@
+import { StringBuilder } from '@/shared/utils'
 import type { ProductsContract } from '../contracts/products.contract'
 import type {
   ListProductsRequestDTO,
@@ -9,7 +10,7 @@ export class ListProductsUseCase {
   constructor(private service: ProductsContract) {}
 
   async execute(queries: ListProductsRequestDTO = {}): Promise<ListProductsResponseDTO> {
-    const { limit = 12, page = 1 } = queries
+    const { limit = 20, page = 1 } = queries
 
     const data: ProductItemDTO[] = []
 
@@ -20,9 +21,9 @@ export class ListProductsUseCase {
         id: product.id,
         title: product.title,
         image: product.image,
-        price: product.price,
-        brand: product.brand,
-        model: product.model,
+        price: product.formattedPrice,
+        description: product.slug,
+        model: StringBuilder.parse(product.model).sliced(20).build(),
       })
     })
 

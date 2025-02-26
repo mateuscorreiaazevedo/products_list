@@ -7,9 +7,9 @@ export interface ProductItemDTO {
   id: number
   title: string
   model: string
-  brand: string
   image: string
-  price: number
+  price: string
+  description: string
 }
 
 export interface ListProductsResponseDTO {

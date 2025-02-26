@@ -1,49 +1,67 @@
-import { productFactory } from '@/core/product'
-import type { ProductItemDTO } from '@/core/product/dtos/list-products.dto'
-import { ProductItemCard } from '@/modules/product'
-import { Grid } from '@/shared/components'
+import { type ListProductsResponseDTO, productFactory } from '@/core/product'
+import { ProductItemCard, useListProductsReducer } from '@/modules/product'
+import { Grid, HStack, MapList, PrimaryButton, VStack } from '@/shared/components'
 import { useTheme } from '@/shared/contexts'
 import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
+import { useCallback } from 'react'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const products = await productFactory.listProducts()
 
   return {
     props: {
-      products: products.data,
+      ...products,
     },
   }
 }
 
-export default function Home({ products }: { products: ProductItemDTO[] }) {
-  const { toggleTheme } = useTheme()
+export default function Home({ data, limit, page }: ListProductsResponseDTO) {
+  const { theme } = useTheme()
+
+  const { dispatch, loading, newPage, products } = useListProductsReducer({
+    data,
+    loading: false,
+    page,
+  })
+
+  const handleListNewsProducts = useCallback(async () => {
+    try {
+      dispatch({ type: 'SET_LOADING', payload: true })
+      const offsetPage = newPage + 1
+
+      const { data: newListProducts } = await productFactory.listProducts({
+        limit,
+        page: offsetPage,
+      })
+
+      dispatch({ payload: newListProducts, type: 'SET_DATA' })
+      dispatch({ payload: offsetPage, type: 'SET_PAGE' })
+    } catch (_e) {
+    } finally {
+      dispatch({ type: 'SET_LOADING', payload: false })
+    }
+  }, [newPage, loading])
 
   return (
     <>
       <Head>
         <title>Products List</title>
       </Head>
-      <div
-        style={{
-          width: '100%',
-          height: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'column',
-          justifyContent: 'center',
-        }}
-      >
-        <h1 aria-roledescription="heading">Olá</h1>
-        <button type="button" onClick={toggleTheme}>
-          Trocar tema
-        </button>
+
+      <VStack>
         <Grid>
-          {products.map(item => (
-            <ProductItemCard key={item.id} {...item} />
-          ))}
+          <MapList
+            data={products}
+            renderItem={({ item }) => <ProductItemCard {...item} key={item.id} />}
+          />
         </Grid>
-      </div>
+        <HStack padding={theme.spacing[4]} alignItems="center" justifyContent="center">
+          <PrimaryButton disabled={loading} onClick={handleListNewsProducts} type="button">
+            Mais...
+          </PrimaryButton>
+        </HStack>
+      </VStack>
     </>
   )
 }

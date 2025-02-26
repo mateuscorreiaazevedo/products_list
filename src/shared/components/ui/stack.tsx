@@ -1,11 +1,17 @@
-import type { Spacing } from '@/@types/theme'
 import styled from 'styled-components'
 
 type StackProps = {
   reverse?: boolean
-  gap?: Spacing
+  gap?: string
   alignItems?: 'baseline' | 'center' | 'flex-start' | 'flex-end'
-  justifyContent?: 'baseline' | 'center' | 'flex-start' | 'flex-end'
+  padding?: string
+  justifyContent?:
+    | 'space-between'
+    | 'center'
+    | 'flex-start'
+    | 'flex-end'
+    | 'space-around'
+    | 'space-evenly'
   width?: string
   height?: string
 }
@@ -18,6 +24,7 @@ export const VStack = styled.div<StackProps>`
   align-items: ${({ alignItems = 'center' }) => alignItems};
   justify-content: ${({ justifyContent = 'flex-start' }) => justifyContent};
   gap: ${({ gap, theme }) => gap ?? theme.spacing[1]};
+  padding: ${({ padding }) => padding};
 `
 
 export const HStack = styled.div<StackProps>`
@@ -29,4 +36,6 @@ export const HStack = styled.div<StackProps>`
   align-items: ${({ alignItems = 'center' }) => alignItems};
   justify-content: ${({ justifyContent = 'flex-start' }) => justifyContent};
   gap: ${({ theme, gap }) => gap ?? theme.spacing[1]};
+  padding: ${({ padding }) => padding};
+
 `

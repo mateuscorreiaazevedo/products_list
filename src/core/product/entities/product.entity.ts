@@ -1,4 +1,4 @@
-import { CurrencyBuilder } from '@/shared/utils'
+import { CurrencyBuilder, StringBuilder } from '@/shared/utils'
 
 export interface IProduct {
   id: number
@@ -52,6 +52,10 @@ export class Product {
   }
 
   get formattedPrice() {
-    return CurrencyBuilder.format(this.price).toBRL()
+    return CurrencyBuilder.format(this.price).toUSD()
+  }
+
+  get slug() {
+    return StringBuilder.parse(this.description).sliced(30).build()
   }
 }
