@@ -1,3 +1,5 @@
+import { CurrencyBuilder } from '@/shared/utils'
+
 export interface IProduct {
   id: number
   title: string
@@ -50,9 +52,6 @@ export class Product {
   }
 
   get formattedPrice() {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(this.price)
+    return CurrencyBuilder.format(this.price).toBRL()
   }
 }

@@ -9,9 +9,16 @@ export function ProductItemCard(props: ProductItemDTO) {
   return (
     <Card>
       <VStack justifyContent="flex-start" width={theme.spacing.full}>
-        <Img alt={props.title} src={props.image} width={280} height={280} loading="lazy" />
+        <Img
+          alt={props.title}
+          src={props.image}
+          data-testid={`image-cover-${props.id}`}
+          width={280}
+          height={280}
+          loading="lazy"
+        />
         <VStack alignItems="flex-start">
-          <Text font={theme.text.subHeader}>{props.brand}</Text>
+          <Text>{props.brand}</Text>
           <Text
             truncate
             width={'210px'}
