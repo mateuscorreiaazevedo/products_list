@@ -1,13 +1,27 @@
-import { type ListProductsResponseDTO, productFactory } from '@/core/product'
+import { type ListProductsResponseDTO, ProductFactory } from '@/core/product'
 import { ProductItemCard, useListProductsReducer } from '@/modules/product'
-import { Grid, HStack, MapList, PrimaryButton, VStack } from '@/shared/components'
+import {
+  Grid,
+  HStack,
+  Loading,
+  MapList,
+  PrimaryButton,
+  Show,
+  VStack,
+} from '@/shared/components'
 import { useTheme } from '@/shared/contexts'
 import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useCallback } from 'react'
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const products = await productFactory.listProducts()
+type QueryProps = {
+  search?: string
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const { search } = query as QueryProps
+
+  const products = await ProductFactory.http().listProducts({ search })
 
   return {
     props: {
@@ -30,7 +44,7 @@ export default function Home({ data, limit, page }: ListProductsResponseDTO) {
       dispatch({ type: 'SET_LOADING', payload: true })
       const offsetPage = newPage + 1
 
-      const { data: newListProducts } = await productFactory.listProducts({
+      const { data: newListProducts } = await ProductFactory.http().listProducts({
         limit,
         page: offsetPage,
       })
@@ -49,7 +63,7 @@ export default function Home({ data, limit, page }: ListProductsResponseDTO) {
         <title>Products List</title>
       </Head>
 
-      <VStack>
+      <VStack alignItems="center" width={theme.spacing.full}>
         <Grid>
           <MapList
             data={products}
@@ -57,9 +71,11 @@ export default function Home({ data, limit, page }: ListProductsResponseDTO) {
           />
         </Grid>
         <HStack padding={theme.spacing[4]} alignItems="center" justifyContent="center">
-          <PrimaryButton disabled={loading} onClick={handleListNewsProducts} type="button">
-            Mais...
-          </PrimaryButton>
+          <Show condition={!loading} fallback={Loading}>
+            <PrimaryButton disabled={loading} onClick={handleListNewsProducts} type="button">
+              Mais...
+            </PrimaryButton>
+          </Show>
         </HStack>
       </VStack>
     </>

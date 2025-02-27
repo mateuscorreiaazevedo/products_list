@@ -2,7 +2,7 @@ import type { ProductsContract } from '../../contracts/products.contract'
 import type { Product } from '../../entities/product.entity'
 import { ProductsMockBuilder } from '../../utils/mocks/products-mock-builder'
 
-export class MockListProductsService implements ProductsContract {
+export class MockProductsService implements ProductsContract {
   async listAll(page: number, limit: number): Promise<Product[]> {
     await new Promise(resolve => setTimeout(resolve, 2130))
 

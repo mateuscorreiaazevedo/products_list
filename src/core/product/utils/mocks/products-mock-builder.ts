@@ -43,6 +43,7 @@ export class ProductsMockBuilder {
         image: product.image,
         price: product.formattedPrice,
         description: product.slug,
+        brand: product.brand,
       })
     })
 

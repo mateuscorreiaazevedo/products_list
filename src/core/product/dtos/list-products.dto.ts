@@ -1,6 +1,7 @@
 export interface ListProductsRequestDTO {
   page?: number
   limit?: number
+  search?: string
 }
 
 export interface ProductItemDTO {
@@ -9,6 +10,7 @@ export interface ProductItemDTO {
   model: string
   image: string
   price: string
+  brand: string
   description: string
 }
 

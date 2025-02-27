@@ -28,13 +28,18 @@ export function ProductItemCard(props: ProductItemDTO) {
           height={280}
           loading="lazy"
         />
-        <VStack alignItems="flex-start" width={theme.spacing.full}>
+        <VStack
+          padding={`${theme.spacing[4]} 0 0 0`}
+          alignItems="flex-start"
+          width={theme.spacing.full}
+        >
           <HStack width={theme.spacing.full} justifyContent="space-between" alignItems="center">
             <CardProductModel>
               {StringBuilder.parse(props.model).sliced(20).build()}
             </CardProductModel>
             <CardProductPrice>{props.price}</CardProductPrice>
           </HStack>
+          <CardProductDescription>{props.brand}</CardProductDescription>
           <CardProductDescription>{props.description}</CardProductDescription>
         </VStack>
       </VStack>

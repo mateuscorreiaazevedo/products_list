@@ -10,7 +10,7 @@ export class ListProductsUseCase {
   constructor(private service: ProductsContract) {}
 
   async execute(queries: ListProductsRequestDTO = {}): Promise<ListProductsResponseDTO> {
-    const { limit = 20, page = 1 } = queries
+    const { limit = 20, page = 1, search } = queries
 
     const data: ProductItemDTO[] = []
 
@@ -23,6 +23,7 @@ export class ListProductsUseCase {
         image: product.image,
         price: product.formattedPrice,
         description: product.slug,
+        brand: StringBuilder.parse(product.brand).capitalize().build(),
         model: StringBuilder.parse(product.model).sliced(20).build(),
       })
     })
@@ -30,7 +31,17 @@ export class ListProductsUseCase {
     return {
       page,
       limit,
-      data,
+      data: search ? this.searchProduct(search, data) : data,
     }
+  }
+
+  private searchProduct(search: string, data: ProductItemDTO[]): ProductItemDTO[] {
+    return data.filter(product => {
+      return (
+        product.title.toLowerCase().includes(search?.toLowerCase()) ||
+        product.model.toLowerCase().includes(search?.toLowerCase()) ||
+        product.brand.toLowerCase().includes(search?.toLowerCase())
+      )
+    })
   }
 }

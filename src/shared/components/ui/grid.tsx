@@ -5,6 +5,7 @@ export const Grid = styled.div`
   padding: ${({ theme }) => theme.spacing[4]};
   gap: ${({ theme }) => theme.spacing['5']};
   grid-template-columns: repeat(1, minmax(0, 1fr));
+  margin: 0 auto;
   
   @media (min-width: 768px) {
   padding: ${({ theme }) => theme.spacing[8]};

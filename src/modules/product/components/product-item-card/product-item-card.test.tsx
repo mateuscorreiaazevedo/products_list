@@ -7,6 +7,7 @@ const mockProduct: ProductItemDTO = {
   image: 'https://example.com/image.jpg',
   model: 'iPhone 13 Pro Max',
   price: '$ 999.99',
+  brand: 'Apple',
   title: 'Apple iPhone 13 Pro Max',
   description: 'Lorem ipsum dolor sit amet, consectetur adip',
 }
@@ -20,6 +21,7 @@ describe('ProductItemCard', () => {
     const { getByText, getByAltText } = renderComponent()
     expect(getByText(mockProduct.model)).toBeTruthy()
     expect(getByAltText(mockProduct.title)).toBeInTheDocument()
+    expect(getByText(mockProduct.brand)).toBeInTheDocument()
     expect(getByText(mockProduct.description)).toBeInTheDocument()
   })
 

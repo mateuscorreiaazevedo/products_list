@@ -5,7 +5,7 @@ import styled from 'styled-components'
 export const CardProductItem = styled(Link)`
   border-radius: ${({ theme }) => theme.radius.base};
   width: 100%;
-  height: 240px;
+  height: 320px;
   text-decoration: none;
   background: ${({ theme }) => (theme.title === 'light' ? darken(0.02, theme.colors.background) : lighten(0.05, theme.colors.background))};
   color: ${({ theme }) => theme.colors.card.text};
@@ -24,7 +24,10 @@ export const CardProductModel = styled.strong`
   line-height: ${({ theme }) => theme.text.label.lineHeight};
   letter-spacing: ${({ theme }) => theme.text.label.letterSpacing};
   color: ${({ theme }) => theme.colors.foreground};
-  max-width: 240px;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 export const CardProductDescription = styled.span`
