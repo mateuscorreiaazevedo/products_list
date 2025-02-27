@@ -38,4 +38,10 @@ export const HStack = styled.div<StackProps>`
   gap: ${({ theme, gap }) => gap ?? theme.spacing[1]};
   padding: ${({ padding }) => padding};
 
+  &.header-stack {
+  @media (max-width: 768px) {
+    justify-content: space-between;
+    width: 100%;
+  }
+  }
 `

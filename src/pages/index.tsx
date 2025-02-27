@@ -1,6 +1,7 @@
 import { type ListProductsResponseDTO, ProductFactory } from '@/core/product'
 import { ProductItemCard, useListProductsReducer } from '@/modules/product'
 import {
+  EmptyData,
   Grid,
   HStack,
   Loading,
@@ -18,7 +19,8 @@ type QueryProps = {
   search?: string
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ query, res }) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate')
   const { search } = query as QueryProps
 
   const products = await ProductFactory.http().listProducts({ search })
@@ -64,19 +66,23 @@ export default function Home({ data, limit, page }: ListProductsResponseDTO) {
       </Head>
 
       <VStack alignItems="center" width={theme.spacing.full}>
-        <Grid>
-          <MapList
-            data={products}
-            renderItem={({ item }) => <ProductItemCard {...item} key={item.id} />}
-          />
-        </Grid>
-        <HStack padding={theme.spacing[4]} alignItems="center" justifyContent="center">
-          <Show condition={!loading} fallback={Loading}>
-            <PrimaryButton disabled={loading} onClick={handleListNewsProducts} type="button">
-              Mais...
-            </PrimaryButton>
-          </Show>
-        </HStack>
+        <Show condition={!!products.length} fallback={EmptyData}>
+          <Grid>
+            <MapList
+              data={products}
+              renderItem={({ item }) => <ProductItemCard {...item} key={item.id} />}
+            />
+          </Grid>
+        </Show>
+        <Show condition={!!products.length}>
+          <HStack padding={theme.spacing[4]} alignItems="center" justifyContent="center">
+            <Show condition={!loading} fallback={Loading}>
+              <PrimaryButton disabled={loading} onClick={handleListNewsProducts} type="button">
+                Mais...
+              </PrimaryButton>
+            </Show>
+          </HStack>
+        </Show>
       </VStack>
     </>
   )
