@@ -1,6 +1,6 @@
 import { CategoryFactory } from '@/core/category'
 import { ProductFactory } from '@/core/product'
-import { ProductItemCard } from '@/modules/product'
+import { ProductItemCard } from '@/modules/home'
 import type { ComponentType } from 'react'
 import { MapList } from '.'
 

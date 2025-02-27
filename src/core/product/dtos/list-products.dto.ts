@@ -4,6 +4,10 @@ export interface ListProductsRequestDTO {
   search?: string
 }
 
+export interface ListProductsByCategoryRequestDTO extends ListProductsRequestDTO {
+  category?: string
+}
+
 export interface ProductItemDTO {
   id: number
   title: string

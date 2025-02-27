@@ -5,6 +5,7 @@ import { darken } from 'polished'
 import { type ChangeEvent, type PropsWithChildren, useState } from 'react'
 import { Show } from '../show'
 import { IconButton } from '../ui/buttons'
+import { Container } from '../ui/container'
 import { HStack } from '../ui/stack'
 import { Text } from '../ui/text'
 import { SearchBarContainer, SearchBarInput } from './search-bar'
@@ -28,6 +29,7 @@ export function AppLayout({ children }: PropsWithChildren) {
 
   const handleSearch = () => {
     const queryString = {
+      ...router.query,
       ...(searchValue && { search: searchValue }),
     }
 
@@ -96,7 +98,7 @@ export function AppLayout({ children }: PropsWithChildren) {
           </HStack>
         </HeaderContent>
       </HeaderContainer>
-      {children}
+      <Container>{children}</Container>
     </>
   )
 }

@@ -25,6 +25,28 @@ export class HttpClientProductService implements ProductsContract {
 
     return products
   }
+
+  async listByCategory(page: number, limit: number, category: string): Promise<Product[]> {
+    const products: Product[] = []
+    const response = await this.service.request<ApiListProducts>({
+      method: 'get',
+      url: '/products/category',
+      params: {
+        limit,
+        page,
+        type: category,
+      },
+    })
+
+    response.data.products.forEach(product => {
+      const mappedProduct = ProductMapper.toEntity(product)
+
+      products.push(mappedProduct)
+    })
+
+    return products
+  }
+
   async getById(id: number): Promise<Product> {
     await new Promise(resolve => resolve)
     return new Product({

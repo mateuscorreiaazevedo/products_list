@@ -20,6 +20,7 @@ const config: Config = {
     '!<rootDir>/src/**/global.ts',
     '!<rootDir>/src/**/http-status-helper.ts',
     '!<rootDir>/src/**/_*.tsx',
+    '!<rootDir>/src/**/types/*.ts',
     '!**/*.d.ts',
   ],
 }

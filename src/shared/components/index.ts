@@ -5,6 +5,7 @@ export * from './ui/card'
 export * from './ui/img'
 export * from './ui/buttons'
 export * from './ui/loading'
+export * from './ui/select'
 
 export * from './layout'
 export * from './map-list'
