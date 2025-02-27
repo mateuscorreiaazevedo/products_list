@@ -1,4 +1,4 @@
-export interface ApiResponse {
+declare interface ApiResponse {
   status: string
   message: string
 }

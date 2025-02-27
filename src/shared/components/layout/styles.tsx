@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { darken, lighten, transparentize } from 'polished'
 import styled from 'styled-components'
 
@@ -20,4 +21,8 @@ export const HeaderContent = styled.nav`
     flex-direction: column-reverse;
     align-items: flex-start;
   }
+`
+
+export const LinkStyled = styled(Link)`
+  text-decoration: none;
 `

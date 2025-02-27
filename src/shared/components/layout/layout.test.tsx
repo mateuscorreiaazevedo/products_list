@@ -12,7 +12,7 @@ const renderComponent = () => {
     query: {},
     pathname: '/',
     push: jest.fn(),
-    replace: jest.fn(),
+    replace: jest.fn,
   })
 
   return renderWithTheme(<AppLayout />)

@@ -11,6 +11,6 @@ export class MockProductsService implements ProductsContract {
   async getById(id: number): Promise<Product | null> {
     await new Promise(resolve => setTimeout(resolve, 1130))
 
-    return ProductsMockBuilder.generate(1, 1).findById(id) ?? null
+    return ProductsMockBuilder.generate(1, 10).findById(id) ?? null
   }
 }

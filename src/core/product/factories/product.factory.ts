@@ -2,7 +2,7 @@ import { AxiosHttpClientService } from '@/shared/services/http'
 import type { ProductsContract } from '../contracts/products.contract'
 import type { ListProductsRequestDTO, ListProductsResponseDTO } from '../dtos/list-products.dto'
 import { HttpClientProductService } from '../services/http/http-client-product.service'
-import { MockProductsService } from '../services/mock/mock-list-products.service'
+import { MockProductsService } from '../services/mock/mock-products.service'
 import { ListProductsUseCase } from '../usecases/list-products.usecase'
 
 export class ProductFactory {

@@ -1,5 +1,6 @@
+import { CategoryFactory, type ListCategoriesResponseDTO } from '@/core/category'
 import { type ListProductsResponseDTO, ProductFactory } from '@/core/product'
-import { ProductItemCard, useListProductsReducer } from '@/modules/product'
+import { ProductItemCard, useListProducts } from '@/modules/product'
 import {
   EmptyData,
   Grid,
@@ -13,7 +14,6 @@ import {
 import { useTheme } from '@/shared/contexts'
 import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { useCallback } from 'react'
 
 type QueryProps = {
   search?: string
@@ -23,41 +23,37 @@ export const getServerSideProps: GetServerSideProps = async ({ query, res }) => 
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate')
   const { search } = query as QueryProps
 
-  const products = await ProductFactory.http().listProducts({ search })
+  let responseProducts = {} as ListProductsResponseDTO
+  let responseCategories = {} as ListCategoriesResponseDTO
+
+  const [productsResult, categoriesResult] = await Promise.allSettled([
+    ProductFactory.http().listProducts({ search }),
+    CategoryFactory.http().listCategories(),
+  ])
+
+  if (productsResult.status === 'fulfilled') {
+    responseProducts = productsResult.value
+  }
+  if (categoriesResult.status === 'fulfilled') {
+    responseCategories = categoriesResult.value
+  }
 
   return {
     props: {
-      ...products,
+      products: responseProducts,
+      categories: responseCategories,
     },
   }
 }
 
-export default function Home({ data, limit, page }: ListProductsResponseDTO) {
+type HomeProps = {
+  products: ListProductsResponseDTO
+  categories: ListCategoriesResponseDTO
+}
+
+export default function Home({ products: responseProducts }: HomeProps) {
+  const { handleListNewsProducts, loading, products } = useListProducts(responseProducts)
   const { theme } = useTheme()
-
-  const { dispatch, loading, newPage, products } = useListProductsReducer({
-    data,
-    loading: false,
-    page,
-  })
-
-  const handleListNewsProducts = useCallback(async () => {
-    try {
-      dispatch({ type: 'SET_LOADING', payload: true })
-      const offsetPage = newPage + 1
-
-      const { data: newListProducts } = await ProductFactory.http().listProducts({
-        limit,
-        page: offsetPage,
-      })
-
-      dispatch({ payload: newListProducts, type: 'SET_DATA' })
-      dispatch({ payload: offsetPage, type: 'SET_PAGE' })
-    } catch (_e) {
-    } finally {
-      dispatch({ type: 'SET_LOADING', payload: false })
-    }
-  }, [newPage, loading])
 
   return (
     <>

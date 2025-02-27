@@ -18,7 +18,7 @@ export class ProductsMockBuilder {
         new Product({
           id,
           title: `Produto ${id}`,
-          image: `https://example.com/image-${id}.jpg`,
+          image: '',
           price: 19.99,
           description: `Descrição do produto ${id}.`,
           brand: 'Marca Exemplo',

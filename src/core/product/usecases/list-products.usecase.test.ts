@@ -1,4 +1,4 @@
-import { MockProductsService } from '../services/mock/mock-list-products.service'
+import { MockProductsService } from '../services/mock/mock-products.service'
 import { ProductsMockBuilder } from '../utils/mocks/products-mock-builder'
 import { ListProductsUseCase } from './list-products.usecase'
 

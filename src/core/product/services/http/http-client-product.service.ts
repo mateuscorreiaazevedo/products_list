@@ -18,7 +18,7 @@ export class HttpClientProductService implements ProductsContract {
     })
 
     response.data.products.forEach(product => {
-      const mappedProduct = ProductMapper.toDomain(product)
+      const mappedProduct = ProductMapper.toEntity(product)
 
       products.push(mappedProduct)
     })

@@ -1,5 +1,3 @@
-import type { ApiResponse } from './api-response'
-
 export interface ApiProduct {
   id: number
   title: string

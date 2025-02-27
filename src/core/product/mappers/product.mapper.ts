@@ -2,7 +2,7 @@ import { Product } from '../entities/product.entity'
 import type { ApiProduct } from '../types/api-product'
 
 export class ProductMapper {
-  static toDomain(payload: ApiProduct): Product {
+  static toEntity(payload: ApiProduct): Product {
     return new Product({
       id: payload.id,
       title: payload.title,
