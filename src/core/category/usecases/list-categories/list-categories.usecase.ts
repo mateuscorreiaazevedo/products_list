@@ -1,5 +1,5 @@
-import type { CategoryContract } from '../contracts/category.contract'
-import type { CategoryItemDTO, ListCategoriesResponseDTO } from '../dtos/list-categories.dto'
+import type { CategoryContract } from '../../contracts/category.contract'
+import type { CategoryItemDTO, ListCategoriesResponseDTO } from '../../dtos/list-categories.dto'
 
 export class ListCategoriesUseCase {
   constructor(private readonly service: CategoryContract) {}
