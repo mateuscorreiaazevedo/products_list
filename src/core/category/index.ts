@@ -6,3 +6,5 @@ export * from './dtos/list-categories.dto'
 export * from './services/mock/mock-category.service'
 export * from './usecases/list-categories/list-categories.usecase'
 export * from './factories/category.factory'
+
+export * from './utils/mocks/category-mock-builder'
