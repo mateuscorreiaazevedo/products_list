@@ -1,5 +1,5 @@
-import { MockCategoryService } from '../services/mock/mock-category.service'
-import { CategoryMocksBuilder } from '../utils/mocks/category-mock-builder'
+import { MockCategoryService } from '../../services/mock/mock-category.service'
+import { CategoryMocksBuilder } from '../../utils/mocks/category-mock-builder'
 import { ListCategoriesUseCase } from './list-categories.usecase'
 
 const mockCategories = CategoryMocksBuilder.generate().listDTO()

@@ -3,7 +3,7 @@ import type { CategoryContract } from '../contracts/category.contract'
 import type { ListCategoriesResponseDTO } from '../dtos/list-categories.dto'
 import { HttpClientCategoryService } from '../services/http/http-client-category.service'
 import { MockCategoryService } from '../services/mock/mock-category.service'
-import { ListCategoriesUseCase } from '../usecases/list-categories.usecase'
+import { ListCategoriesUseCase } from '../usecases/list-categories/list-categories.usecase'
 
 export class CategoryFactory {
   private categoryService: CategoryContract
