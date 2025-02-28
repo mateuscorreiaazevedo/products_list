@@ -20,7 +20,8 @@ export const SelectTrigger = styled(Select.Trigger)`
   box-shadow: 0 2px 10px ${({ theme }) => transparentize(0.8, theme.colors.dark)};
   outline: none;
   &:hover {
-    background: #f3f0ff;
+  background: ${({ theme }) => (theme.title === 'light' ? darken(0.2, theme.colors.light) : lighten(0.2, theme.colors.dark))};
+
   }
   &:focus {
     box-shadow: 0 0 0 2px ${props => darken(0.2, props.theme.colors.background)};

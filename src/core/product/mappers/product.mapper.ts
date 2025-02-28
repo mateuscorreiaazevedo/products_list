@@ -13,6 +13,7 @@ export class ProductMapper {
       model: payload.model,
       color: payload.color,
       discount: payload.discount,
+      category: payload.category,
     })
   }
 }

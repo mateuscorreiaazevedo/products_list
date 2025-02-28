@@ -6,17 +6,17 @@ export class MockProductsService implements ProductsContract {
   async listAll(page: number, limit: number): Promise<Product[]> {
     await new Promise(resolve => setTimeout(resolve, 2130))
 
-    return ProductsMockBuilder.generate(page, limit).build()
+    return ProductsMockBuilder.generate(page, limit).listBuild()
   }
 
-  async listByCategory(page: number, limit: number, _category: string): Promise<Product[]> {
+  async listByCategory(page: number, limit: number, category: string): Promise<Product[]> {
     await new Promise(resolve => setTimeout(resolve, 1930))
 
-    return ProductsMockBuilder.generate(page, limit).build()
+    return ProductsMockBuilder.generate(page, limit).filterByCategory(category).listBuild()
   }
-  async getById(id: number): Promise<Product | null> {
+  async findById(id: number): Promise<Product | null> {
     await new Promise(resolve => setTimeout(resolve, 1130))
 
-    return ProductsMockBuilder.generate(1, 10).findById(id) ?? null
+    return ProductsMockBuilder.generate(1, 10).findById(id).itemBuild()
   }
 }

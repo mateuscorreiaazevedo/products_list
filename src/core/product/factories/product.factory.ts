@@ -7,8 +7,8 @@ import type {
 } from '../dtos/list-products.dto'
 import { HttpClientProductService } from '../services/http/http-client-product.service'
 import { MockProductsService } from '../services/mock/mock-products.service'
-import { ListProductsByCategoryUseCase } from '../usecases/list-products-by-category.usecase'
-import { ListProductsUseCase } from '../usecases/list-products.usecase'
+import { ListProductsByCategoryUseCase } from '../usecases/list-products-by-category/list-products-by-category.usecase'
+import { ListProductsUseCase } from '../usecases/list-products/list-products.usecase'
 
 export class ProductFactory {
   private productService: ProductsContract

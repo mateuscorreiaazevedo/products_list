@@ -1,30 +1,29 @@
-import { StringBuilder } from '@/shared/utils'
-import type { ProductsContract } from '../contracts/products.contract'
+import type { ProductsContract } from '../../contracts/products.contract'
 import type {
-  ListProductsRequestDTO,
+  ListProductsByCategoryRequestDTO,
   ListProductsResponseDTO,
   ProductItemDTO,
-} from '../dtos/list-products.dto'
+} from '../../dtos/list-products.dto'
 
-export class ListProductsUseCase {
-  constructor(private service: ProductsContract) {}
+export class ListProductsByCategoryUseCase {
+  constructor(private readonly service: ProductsContract) {}
 
-  async execute(queries: ListProductsRequestDTO = {}): Promise<ListProductsResponseDTO> {
-    const { limit = 20, page = 1, search } = queries
+  async execute(dto: ListProductsByCategoryRequestDTO = {}): Promise<ListProductsResponseDTO> {
+    const { page = 1, limit = 20, search, category } = dto
 
     const data: ProductItemDTO[] = []
 
-    const response = await this.service.listAll(page, limit)
+    const response = await this.service.listByCategory(page, limit, category ?? '')
 
     response.forEach(product => {
       data.push({
         id: product.id,
         title: product.title,
+        model: product.model,
         image: product.image,
         price: product.formattedPrice,
+        brand: product.brand,
         description: product.slug,
-        brand: StringBuilder.parse(product.brand).capitalize().build(),
-        model: StringBuilder.parse(product.model).sliced(20).build(),
       })
     })
 

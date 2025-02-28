@@ -1,8 +1,9 @@
 import type { HttpClientContract } from '@/shared/contracts'
+import { HttpStatusHelper } from '@/shared/utils'
 import type { ProductsContract } from '../../contracts/products.contract'
-import { Product } from '../../entities/product.entity'
+import type { Product } from '../../entities/product.entity'
 import { ProductMapper } from '../../mappers/product.mapper'
-import type { ApiListProducts } from '../../types/api-product'
+import type { ApiItemProduct, ApiListProducts } from '../../types/api-product'
 
 export class HttpClientProductService implements ProductsContract {
   constructor(private readonly service: HttpClientContract) {}
@@ -47,19 +48,14 @@ export class HttpClientProductService implements ProductsContract {
     return products
   }
 
-  async getById(id: number): Promise<Product> {
-    await new Promise(resolve => resolve)
-    return new Product({
-      id: id,
-      title: 'Sample Product',
-      image: 'https://example.com/image.jpg',
-      price: 19.99,
-      description: 'This is a sample product.',
-      brand: 'Example Brand',
-      model: 'Example Model',
-      color: 'Example Color',
-      category: 'Example Category',
-      discount: 10,
+  async findById(id: number): Promise<Product | null> {
+    const response = await this.service.request<ApiItemProduct>({
+      method: 'get',
+      url: `/products/${id}`,
     })
+
+    const { product } = HttpStatusHelper.validate(response)
+
+    return product ? ProductMapper.toEntity(product) : null
   }
 }

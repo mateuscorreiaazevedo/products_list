@@ -1,5 +1,5 @@
-import { MockProductsService } from '../services/mock/mock-products.service'
-import { ProductsMockBuilder } from '../utils/mocks/products-mock-builder'
+import { MockProductsService } from '../../services/mock/mock-products.service'
+import { ProductsMockBuilder } from '../../utils/mocks/products-mock-builder'
 import { ListProductsUseCase } from './list-products.usecase'
 
 const mockProducts = ProductsMockBuilder.generate(1, 20).listDTO()

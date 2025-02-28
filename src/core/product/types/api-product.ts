@@ -7,7 +7,7 @@ export interface ApiProduct {
   brand: string
   model: string
   color: string
-  onSale: boolean
+  category?: string
   discount: number
 }
 
@@ -16,5 +16,5 @@ export interface ApiListProducts extends ApiResponse {
 }
 
 export interface ApiItemProduct extends ApiResponse {
-  product: ApiProduct
+  product?: ApiProduct
 }
