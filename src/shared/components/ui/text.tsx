@@ -13,13 +13,22 @@ export type TextProps = {
   width?: string
 }
 
-const TextStyled = ({ as = 'h1', color, font, truncate, width }: TextProps) => styled(as)`
+const TextStyled = ({
+  as = 'h1',
+  color,
+  font,
+  truncate,
+  width,
+  capitalize,
+}: TextProps) => styled(as)`
   font-size: ${({ theme }) => (font ? font.fontSize : theme.text.heading.fontSize)};
   font-weight: ${({ theme }) => (font ? font.fontWeight : theme.text.heading.fontWeight)};
   line-height: ${({ theme }) => (font ? font.lineHeight : theme.text.heading.lineHeight)};
   letter-spacing: ${({ theme }) => (font ? font.letterSpacing : theme.text.heading.letterSpacing)};
   color: ${({ theme }) => (color ? color : theme.colors.foreground)};
   width: ${({ theme }) => (width ? width : theme.spacing.fit)};
+  ${() => capitalize && css`text-transform: capitalize`}
+  
   ${() =>
     truncate &&
     css`

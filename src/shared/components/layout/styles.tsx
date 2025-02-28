@@ -26,3 +26,14 @@ export const HeaderContent = styled.nav`
 export const LinkStyled = styled(Link)`
   text-decoration: none;
 `
+
+export const Footer = styled.footer`
+  background-color: ${({ theme }) => theme.colors.dark};
+  color: ${({ theme }) => theme.colors.foreground};
+  padding: ${({ theme }) => `${theme.spacing[4]} ${theme.spacing[10]}`};
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`

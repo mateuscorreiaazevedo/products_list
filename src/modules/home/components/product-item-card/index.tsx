@@ -13,7 +13,7 @@ export function ProductItemCard(props: ProductItemDTO) {
   const { theme } = useTheme()
 
   return (
-    <CardProductItem href={''}>
+    <CardProductItem href={`/product/${props.id}`}>
       <VStack
         justifyContent="flex-start"
         alignItems="flex-start"

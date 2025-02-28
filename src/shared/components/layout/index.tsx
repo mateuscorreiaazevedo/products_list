@@ -9,7 +9,7 @@ import { Container } from '../ui/container'
 import { HStack } from '../ui/stack'
 import { Text } from '../ui/text'
 import { SearchBarContainer, SearchBarInput } from './search-bar'
-import { HeaderContainer, HeaderContent, LinkStyled } from './styles'
+import { Footer, HeaderContainer, HeaderContent, LinkStyled } from './styles'
 
 export function AppLayout({ children }: PropsWithChildren) {
   const { theme, toggleTheme } = useTheme()
@@ -99,6 +99,11 @@ export function AppLayout({ children }: PropsWithChildren) {
         </HeaderContent>
       </HeaderContainer>
       <Container>{children}</Container>
+      <Footer>
+        <Text font={theme.text.subHeader}>
+          &copy; {new Date().getFullYear()} - Products List. Todos os direitos reservados.{' '}
+        </Text>
+      </Footer>
     </>
   )
 }

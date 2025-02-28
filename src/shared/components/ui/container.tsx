@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   padding: ${({ theme }) => theme.spacing[4]};
+  min-height: 100vh;
 
   @media (min-width: 768px) {
     padding: ${({ theme }) => theme.spacing[8]};
