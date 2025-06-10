@@ -1,13 +1,13 @@
 import { StringBuilder } from '@/shared/utils'
-import type { ProductsContract } from '../../contracts/products.contract'
 import type {
   ListProductsRequestDTO,
   ListProductsResponseDTO,
   ProductItemDTO,
 } from '../../dtos/list-products.dto'
+import type { ProductsService } from '../../services/product.service'
 
 export class ListProductsUseCase {
-  constructor(private service: ProductsContract) {}
+  constructor(private service: ProductsService) {}
 
   async execute(queries: ListProductsRequestDTO = {}): Promise<ListProductsResponseDTO> {
     const { limit = 20, page = 1, search } = queries

@@ -1,11 +1,11 @@
-import type { ProductsContract } from '../../contracts/products.contract'
 import type {
   FindProductByIdRequestDTO,
   FindProductByIdResponseDTO,
 } from '../../dtos/find-product-by-id.dto'
+import type { ProductsService } from '../../services/product.service'
 
 export class FindProductByIdUseCase {
-  constructor(private readonly service: ProductsContract) {}
+  constructor(private readonly service: ProductsService) {}
 
   async execute(dto: FindProductByIdRequestDTO): Promise<FindProductByIdResponseDTO> {
     const { id } = dto

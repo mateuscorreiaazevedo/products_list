@@ -1,12 +1,12 @@
-import type { ProductsContract } from '../../contracts/products.contract'
 import type {
   ListProductsByCategoryRequestDTO,
   ListProductsResponseDTO,
   ProductItemDTO,
 } from '../../dtos/list-products.dto'
+import type { ProductsService } from '../../services/product.service'
 
 export class ListProductsByCategoryUseCase {
-  constructor(private readonly service: ProductsContract) {}
+  constructor(private readonly service: ProductsService) {}
 
   async execute(dto: ListProductsByCategoryRequestDTO = {}): Promise<ListProductsResponseDTO> {
     const { page = 1, limit = 20, search, category } = dto

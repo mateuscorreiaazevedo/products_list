@@ -1,11 +1,11 @@
 import type { HttpClientContract } from '@/shared/contracts'
 import { HttpStatusHelper } from '@/shared/utils'
-import type { ProductsContract } from '../../contracts/products.contract'
 import type { Product } from '../../entities/product.entity'
 import { ProductMapper } from '../../mappers/product.mapper'
 import type { ApiItemProduct, ApiListProducts } from '../../types/api-product'
+import type { ProductsService } from '../product.service'
 
-export class HttpClientProductService implements ProductsContract {
+export class HttpClientProductService implements ProductsService {
   constructor(private readonly service: HttpClientContract) {}
   async listAll(page: number, limit: number): Promise<Product[]> {
     const products: Product[] = []
